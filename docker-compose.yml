@@ -1,0 +1,17 @@
+version: "3"
+services:
+  mjws:
+    image: usermine12/mjws:1
+    ports:
+      - 3050:4000
+    container_name: mjws-full
+    volumes:
+      - ./users.json:/mjws-backend/users.json
+      - ./content-strings.json:/mjws-backend/content-strings.json
+      - ./.env:/mjws-backend/.env
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: watchtower
